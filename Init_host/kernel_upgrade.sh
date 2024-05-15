@@ -4,28 +4,39 @@ set -e
 
 # 函数注释：升级内核
 upgrade_kernel() {
-    local kernel_dir="/root/yunhai/kernel_rpm"
+    local kernel_dir="/root/yunhai/kernel_rpm/"
 
     # 检查内核包是否存在
-    if [ ! -f "/root/yunhai/kernel_rpm.zip" ]; then
+    if [ ! -f "/root/yunhai/x86-centos8.2-kernel_rpm.zip" ]; then
         echo "内核包(kernel_rpm.zip)不存在，请确保已将其放在/root/yunhai/目录下。"
         exit 1
     fi
 
-    # 创建存放目录
-    mkdir -p /root/yunhai
+    # 删除旧的解压目录，如果存在
+    if [ -d "$kernel_dir" ]; then
+        rm -rf "$kernel_dir"
+    fi
+
 
     # 解压内核包
-    unzip /root/yunhai/kernel_rpm.zip -d "$kernel_dir"
-
+    unzip /root/yunhai/x86-centos8.2-kernel_rpm.zip -d /root/yunhai/
     # 安装内核包
     local kernel_packages=( "$kernel_dir"/kernel* )
     for package in "${kernel_packages[@]}"; do
-        [ -f "$package" ] || continue
-        yum -y install "$package"
-    done
+            if [ -f "$package" ]; then
+                    echo "正在安装: $package"
+                    yum -y install "$package" > /dev/null 2>&1
+                    if [ $? -eq 0 ]; then
+                        echo "安装成功: $package"
+                    else
+                        echo "安装失败: $package"
+                    fi
+            else
+                    echo "跳过非文件项: $package"
+            fi
+     done
+     echo "内核包已安装，重启生效。"
 
-    echo "内核包已安装，重启生效。"
 }
 
 # 主程序
