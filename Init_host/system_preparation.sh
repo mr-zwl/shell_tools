@@ -1,22 +1,21 @@
 #!/bin/bash
 
 set -e
-
 # 函数注释：准备系统环境
 prepare_system() {
     echo "开始系统准备..."
 
     # 关闭防火墙和SELinux
     systemctl stop firewalld && systemctl disable firewalld
-    setenforce 0
-    sed -i 's/SELINUX=Permissive/SELINUX=disabled/g' /etc/selinux/config
-    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+    setenforce 0 || true
+    sed -i 's/SELINUX=Permissive/SELINUX=disabled/g' /etc/selinux/config || true
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config  || true
 
     echo "已关闭防火墙和SELinux。检查状态：cat /etc/selinux/config | grep SELINUX 或 getenforce"
 
     # 安装依赖包
     local packages="createrepo net-tools tar dmidecode quota gssproxy userspace-rcu ctdb libaio libaio-devel fio nvme-cli smartmontools bash-completion unzip vim telnet numactl mysql-libs mysql-devel mariadb"
-    yum -y install --disablerepo=* --enablerepo=rhel-source "${packages}"
+    yum -y install  ${packages} > /dev/null 2>&1
 
     # 创建目录
     mkdir -p /export
