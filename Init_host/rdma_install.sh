@@ -5,15 +5,15 @@ set -e
 # 函数注释：安装指定版本的RDMA库
 install_rdma() {
     local full_version
-    local rpm_name="librdma-ofs-wrapper-$full_version-Linux.rpm"
-    local rpm_path="/root/yunhai/net_rpm/$rpm_name"
 
     # 提示用户输入完整版本号（包括小版本号，如56103.3.1）
     read -p "请输入您想安装的RDMA库完整版本号（包括小版本号，例如：56103.3.1）: " full_version
+    local rpm_name="librdma-ofs-wrapper-$full_version-Linux.rpm"
+    local rpm_path="/root/yunhai/x86-netdriver_rpm/$rpm_name"
 
     # 检查指定版本的RPM文件是否存在
     if [ ! -f "$rpm_path" ]; then
-        echo "指定版本的RPM文件不存在，请确保$rpm_name位于/root/yunhai/net_rpm/目录中。"
+        echo "指定版本的RPM文件不存在，请确保$rpm_name位于/root/yunhai/x86-netdriver_rpm/目录中。"
         exit 1
     fi
 

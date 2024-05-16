@@ -4,8 +4,8 @@ set -e
 
 # 函数注释：安装MFT
 install_mft() {
-    local mft_tar="/root/yunhai/net_rpm/mft-4.18.0-106-x86_64-rpm.tgz"
-    local mft_dir="/root/yunhai/mft-4.18.0-106-x86_64-rpm"
+    local mft_tar="/root/yunhai/x86-netdriver_rpm/mft-4.18.0-106-x86_64-rpm.tgz"
+    local mft_dir="/root/yunhai/x86-netdriver_rpm/mft-4.18.0-106-x86_64-rpm"
 
     # 检查MFT RPM包是否存在
     if [ ! -f "$mft_tar" ]; then
@@ -17,7 +17,7 @@ install_mft() {
     yum -y install rpm-build kernel-devel-4.18.0-193.el8.x86_64 elfutils-libelf-devel
 
     # 解压MFT RPM包
-    cd /root/yunhai/net_rpm
+    cd /root/yunhai/x86-netdriver_rpm
     tar -xf "$mft_tar"
 
     # 安装MFT
