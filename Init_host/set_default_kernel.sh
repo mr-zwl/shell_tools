@@ -5,17 +5,12 @@ set -e
 # 函数注释：设置默认启动内核
 set_default_kernel() {
     local kernel="$1"
-    if grub2-editenv list | grep -q "^default="; then
-        echo "当前默认启动内核将被修改为：$kernel"
-        if grub2-set-default "$kernel"; then
+    echo "当前默认启动内核将被修改为：$kernel"
+    if grub2-set-default "$kernel"; then
             echo "默认启动内核已成功修改为：$kernel"
-        else
+    else
             echo "修改默认启动内核失败，请检查grub配置。"
             return 1
-        fi
-    else
-        echo "无法找到当前默认启动内核设置。"
-        return 1
     fi
 }
 
