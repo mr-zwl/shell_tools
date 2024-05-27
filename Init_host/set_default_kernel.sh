@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 # 函数注释：设置默认启动内核
 set_default_kernel() {

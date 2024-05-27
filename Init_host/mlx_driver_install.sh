@@ -4,6 +4,10 @@ set -x
 
 # 函数注释：安装Mellanox OFED驱动
 install_mlnx_ofed() {
+    # 检查并处理/x86-netdriver_rpm目录
+    if [ -d "/root/yunhai/x86-netdriver_rpm" ]; then
+        mv /root/yunhai/x86-netdriver_rpm /mnt 
+    fi
     local ofed_dir="/root/yunhai/x86-netdriver_rpm/MLNX_OFED_LINUX-5.6-1.0.3.3-rhel8.2-x86_64"
 
     # 检查OFED包是否存在

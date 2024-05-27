@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 # 函数注释：升级内核
 upgrade_kernel() {
@@ -25,7 +25,7 @@ upgrade_kernel() {
     for package in "${kernel_packages[@]}"; do
             if [ -f "$package" ]; then
                     echo "正在安装: $package"
-                    rpm -i  "$package" --force > /dev/null 2>&1
+                    rpm -i  "$package" --force --nodeps  > /dev/null 2>&1
                     if [ $? -eq 0 ]; then
                         echo "安装成功: $package"
                     else
