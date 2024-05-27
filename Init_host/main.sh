@@ -6,6 +6,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+pwd=$PWD
 # 函数定义
 function first() {
     echo "开始第一阶段初始化..."
@@ -20,6 +21,7 @@ function first() {
     echo "5. 安装Mellanox驱动..."
     . mlx_driver_install.sh
     echo "6. 配置GRUB..."
+    cd $pwd
     . set_default_kernel.sh
     # 征求用户重启许可
     read -p "是否现在重启系统以应用更改？(y/n)：" confirm_reboot
@@ -36,6 +38,7 @@ function second() {
     echo "1. 安装MFT..."
     . mft_install.sh
     echo "2. 安装RDMA软件..."
+    cd $pwd
     . rdma_install.sh
     echo "第二阶段初始化完成。"
 }
