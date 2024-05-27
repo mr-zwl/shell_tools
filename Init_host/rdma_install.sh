@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 # 函数注释：安装指定版本的RDMA库
 install_rdma() {

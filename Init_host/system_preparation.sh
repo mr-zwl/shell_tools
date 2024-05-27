@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 # 函数注释：准备系统环境
 prepare_system() {
     echo "开始系统准备..."

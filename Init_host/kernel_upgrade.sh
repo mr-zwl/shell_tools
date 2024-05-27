@@ -21,11 +21,11 @@ upgrade_kernel() {
     # 解压内核包
     unzip /root/yunhai/x86-centos8.2-kernel_rpm.zip -d /root/yunhai/
     # 安装内核包
-    local kernel_packages=( "$kernel_dir"/kernel* )
+    local kernel_packages=( "$kernel_dir"kernel* )
     for package in "${kernel_packages[@]}"; do
             if [ -f "$package" ]; then
                     echo "正在安装: $package"
-                    yum -y install "$package" > /dev/null 2>&1
+                    rpm -i  "$package" --force > /dev/null 2>&1
                     if [ $? -eq 0 ]; then
                         echo "安装成功: $package"
                     else

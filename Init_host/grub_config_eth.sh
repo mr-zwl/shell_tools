@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 # 函数注释：配置GRUB以固定网卡名称
 grub_eth() {

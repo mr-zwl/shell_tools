@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 # 函数注释：配置网络
 ifcfg() {
@@ -21,12 +21,12 @@ ifcfg() {
     local gateway="192.168.124.2"
     local dns="114.114.114.114"
 
-    printf "BOOTPROTO=static\nNAME=bond0\nDEVICE=bond0\nONBOOT=yes\nBONDING_MASTER=yes\nBONDING_OPTS=\"%s\"\nIPADDR=%s\nNETMASK=%s\nGATEWAY=%s\nDNS1=%s\n" \
+    printf "TYPE=Bond\nBOOTPROTO=static\nNAME=bond0\nDEVICE=bond0\nONBOOT=yes\nBONDING_MASTER=yes\nBONDING_OPTS=\"%s\"\nIPADDR=%s\nNETMASK=%s\nGATEWAY=%s\nDNS1=%s\n" \
         "$bond_opts" "$ip" "$netmask" "$gateway" "$dns" > /etc/sysconfig/network-scripts/ifcfg-bond0
 
-    printf "BOOTPROTO=static\nNAME=eth0\nDEVICE=eth0\nONBOOT=yes\nMASTER=bond0\nUSERCTL=no\nSLAVE=yes\n" > /etc/sysconfig/network-scripts/ifcfg-eth0
+    printf "TYPE=Ethernet\nBOOTPROTO=static\nNAME=eth0\nDEVICE=eth0\nONBOOT=yes\nMASTER=bond0\nUSERCTL=no\nSLAVE=yes\n" > /etc/sysconfig/network-scripts/ifcfg-eth0
 
-    printf "BOOTPROTO=static\nNAME=eth1\nDEVICE=eth1\nONBOOT=yes\nMASTER=bond0\nUSERCTL=no\nSLAVE=yes\n" > /etc/sysconfig/network-scripts/ifcfg-eth1
+    printf "TYPE=Ethernet\nBOOTPROTO=static\nNAME=eth1\nDEVICE=eth1\nONBOOT=yes\nMASTER=bond0\nUSERCTL=no\nSLAVE=yes\n" > /etc/sysconfig/network-scripts/ifcfg-eth1
 
     systemctl enable NetworkManager
     nmcli connection reload && nmcli connection up bond0
