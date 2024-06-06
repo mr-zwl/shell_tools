@@ -8,7 +8,7 @@ install_mlnx_ofed() {
     if [ -d "/root/yunhai/x86-netdriver_rpm" ]; then
         mv /root/yunhai/x86-netdriver_rpm /mnt 
     fi
-    # 可替换版本修改绝对路径即可  MLNX_OFED_LINUX-5.8-4.1.5.0-rhel8.2-x86_64.tgz 
+    # 可替换版本修改绝对路径即可  MLNX_OFED_LINUX-5.8-4.1.5.0-rhel8.2-x86_64
     local ofed_dir="/root/yunhai/x86-netdriver_rpm/MLNX_OFED_LINUX-5.6-1.0.3.3-rhel8.2-x86_64"
 
     # 检查OFED包是否存在
