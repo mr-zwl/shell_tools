@@ -14,7 +14,7 @@ ifcfg() {
 
     echo "配置网络..."
     [ ! -d "/etc/sysconfig/network-scripts/bak" ] && mkdir -p /etc/sysconfig/network-scripts/bak
-
+    mv /etc/sysconfig/network-scripts/ifcfg-* /etc/sysconfig/network-scripts/bak/
     local bond_opts="mode=4 miimon=100 lacp_rate=1 xmit_hash_policy=layer3+4"
     local ip="192.168.124.19"
     local netmask="255.255.255.0"
